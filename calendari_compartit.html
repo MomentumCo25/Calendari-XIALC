@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <title>Calendari Compartit</title>
+  <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css' rel='stylesheet' />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    #calendar {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Calendari Compartit</h1>
+  <div id='calendar'></div>
+
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var calendarEl = document.getElementById('calendar');
+
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        locale: 'ca',
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,listWeek'
+        },
+        events: [
+          {
+            title: 'Reunió de coordinació',
+            start: '2025-05-06',
+            description: 'Revisió de tasques pendents',
+            extendedProps: {
+              categoria: 'Reunió',
+              enllac: 'https://example.com/acta-reunio.pdf',
+              ubicacio: 'Sala de reunions A'
+            }
+          },
+          {
+            title: 'Taller d'idees',
+            start: '2025-05-08',
+            description: 'Generació de propostes noves',
+            extendedProps: {
+              categoria: 'Taller',
+              enllac: 'https://example.com/materials-taller.pdf',
+              ubicacio: 'Espai coworking 2'
+            }
+          },
+          {
+            title: 'Lliurament informe fase 1',
+            start: '2025-05-12',
+            description: 'Entrega documentació parcial',
+            extendedProps: {
+              categoria: 'Lliurament',
+              enllac: 'https://example.com/informe-fase1.pdf',
+              ubicacio: 'Virtual'
+            }
+          },
+          {
+            title: 'Esdeveniment de cloenda',
+            start: '2025-05-20',
+            description: 'Jornada final de presentació',
+            extendedProps: {
+              categoria: 'Esdeveniment',
+              enllac: 'https://example.com/programa-cloenda.pdf',
+              ubicacio: 'Auditori Principal'
+            }
+          }
+        ],
+        eventClick: function (info) {
+          var detall = info.event.title + "\n" +
+                       "Categoria: " + info.event.extendedProps.categoria + "\n" +
+                       "Descripció: " + info.event.description + "\n" +
+                       "Ubicació: " + info.event.extendedProps.ubicacio + "\n" +
+                       "Document: " + info.event.extendedProps.enllac;
+          window.open(info.event.extendedProps.enllac, '_blank');
+        }
+      });
+
+      calendar.render();
+    });
+  </script>
+</body>
+</html>
